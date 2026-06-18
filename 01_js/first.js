@@ -76,15 +76,27 @@
 
 // console.log(text.includes("kasw"));
 
-const arr = ["kasr", "rahmanian", 22];
+// const arr = ["kasr", "rahmanian", 22];
 
-// arr.push(true);
-arr[3] = true;
+// // arr.push(true);
+// arr[3] = true;
 
-const newArr = [...arr, true, { test: 0 }];
+// const newArr = [...arr, true, { test: 0 }];
+// console.log(newArr);
+
+// const obj = { name: "kasr", age: 22 };
+
+// const newObj = { ...obj, name: "shiraz" };
+// console.log(newObj);
+
+const text = "kasra";
+console.log(text.includes("sa"));
+
+const search = "macbook";
+console.log(search.replaceAll(" " , ""));
+const arr = ["apple", "macBook pro", "mac book air"];
+
+const newArr = arr.filter((i) => {
+  return i.toLowerCase().replaceAll(" " , "").includes(search.toLowerCase().replaceAll(" " , ""));
+});
 console.log(newArr);
-
-const obj = { name: "kasr", age: 22 };
-
-const newObj = { ...obj, name: "shiraz" };
-console.log(newObj);
