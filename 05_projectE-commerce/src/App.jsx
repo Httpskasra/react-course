@@ -30,46 +30,11 @@ export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/products"
-          element={
-            <ProtectedRoute>
-              <Products />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/products/add"
-          element={
-            <ProtectedRoute>
-              <AddProduct />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/products/:id"
-          element={
-            <ProtectedRoute>
-              <ProductDetails />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/products/:id/edit"
-          element={
-            <ProtectedRoute>
-              <EditProduct />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/add" element={<AddProduct />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/products/:id/edit" element={<EditProduct />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
