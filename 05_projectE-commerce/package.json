@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.7.1",
     "@vitejs/plugin-react": "latest",
     "axios": "latest",
     "concurrently": "latest",
@@ -20,7 +21,8 @@
     "react-dom": "latest",
     "react-hook-form": "^7.84.0",
     "react-router-dom": "latest",
-    "vite": "latest"
+    "vite": "latest",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "autoprefixer": "latest",
