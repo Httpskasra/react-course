@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: " https://class-api-server.httpskasra.workers.dev",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
-})
+});
 
-export default api
+export default api;

@@ -19,11 +19,13 @@ export const productService = {
 
   updateProduct: async (id, product) => {
     const response = await api.patch(`/products/${id}`, product)
+    
     return response.data
   },
 
   deleteProduct: async (id) => {
     const response = await api.delete(`/products/${id}`)
+    if( ! response.status === 200) return
     return response.data
   },
 }

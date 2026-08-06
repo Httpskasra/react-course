@@ -18,6 +18,8 @@ export default function Dashboard() {
   const totalValue = products.reduce((sum, product) => sum + Number(product.price) * Number(product.stock || 0), 0)
   const recentProducts = products.slice(-4).reverse()
 
+
+  
   const stats = [
     { title: 'Total Products', value: products.length, icon: Boxes, color: 'bg-indigo-50 text-indigo-700' },
     { title: 'Total Categories', value: categories.length, icon: Tags, color: 'bg-emerald-50 text-emerald-700' },
