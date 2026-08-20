@@ -21,7 +21,7 @@ export const productSchema = z.object({
     .int("Stock must be an integer")
     .min(0, "Stock cannot be negative"),
 
-  category: z.string().enum(["Phone", "Accessory", "Tablet", "Laptop"]),
+  category: z.enum(["Phone", "Accessory", "Tablet", "Laptop"]),
 
   description: z
     .string()
@@ -42,8 +42,21 @@ export const productSchema = z.object({
 
 
 const employeeSchema = z.object({
-  fullName: z.string(),
-  email: z.string(),
-  salary: z.coerce.number(),
-  experience: z.coerce.number(),
+  fullName: z
+    .string()
+    .trim()
+    .min(3, 'Full name must be at least 3 characters'),
+
+  email: z
+    .string()
+    .email('Please enter a valid email'),
+
+  salary: z.coerce
+    .number()
+    .positive('Salary must be greater than zero'),
+
+  experience: z.coerce
+    .number()
+    .int('Experience must be an integer')
+    .min(0, 'Experience cannot be negative'),
 })

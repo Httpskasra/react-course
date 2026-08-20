@@ -1,128 +1,97 @@
-import { ArrowLeft, Save } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import ErrorMessage from '../components/ErrorMessage'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../components/Loading'
+import ErrorMessage from '../components/ErrorMessage'
+
+import ProductForm from '../components/Form/ProductForm'
 import { productService } from '../services/productService'
 
-export default function EditProduct() {
+function EditProductPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [form, setForm] = useState(null)
+
+  const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState(null)
+  const [loadError, setLoadError] = useState('')
+  const [submitError, setSubmitError] = useState('')
 
   useEffect(() => {
-    let ignore = false
-
-    async function loadProduct() {
+    const loadProduct = async () => {
       try {
         setLoading(true)
-        setError(null)
-        const product = await productService.getProductById(id)
-        if (!ignore) {
-          setForm({
-            title: product.title || '',
-            price: product.price || '',
-            category: product.category || '',
-            description: product.description || '',
-            image: product.image || '',
-            stock: product.stock || '',
-          })
-        }
-      } catch (err) {
-        if (!ignore) setError(err.message || 'Could not load product')
+        setLoadError('')
+
+        const productData =
+          await productService.getProductById(id)
+
+        setProduct(productData)
+      } catch (error) {
+        console.error(error)
+        setLoadError('Could not load the product.')
       } finally {
-        if (!ignore) setLoading(false)
+        setLoading(false)
       }
     }
 
     loadProduct()
-
-    return () => {
-      ignore = true
-    }
   }, [id])
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
-    setForm((currentForm) => ({ ...currentForm, [name]: value }))
-  }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    setSubmitting(true)
-    setError(null)
-
+  const handleUpdateProduct = async (productData) => {
     try {
-      const payload = {
-        ...form,
-        price: Number(form.price),
-        stock: Number(form.stock),
-      }
-      await productService.updateProduct(id, payload)
+      setSubmitError('')
+
+      await productService.updateProduct(id, productData)
+
       navigate(`/products/${id}`)
-    } catch (err) {
-      setError(err.message || 'Could not update product')
-    } finally {
-      setSubmitting(false)
+    } catch (error) {
+      console.error(error)
+
+      setSubmitError(
+        error.response?.data?.message ||
+        'Could not update the product.'
+      )
     }
   }
 
-  if (loading) return <Loading text="Loading edit form..." />
-  if (error && !form) return <ErrorMessage message={error} />
+  if (loading) {
+    return <Loading />
+  }
+
+  if (loadError) {
+    return <ErrorMessage message={loadError} />
+  }
+
+  if (!product) {
+    return (
+      <ErrorMessage message="Product was not found." />
+    )
+  }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
-      <Link to={`/products/${id}`} className="btn-secondary gap-2">
-        <ArrowLeft size={16} /> Back to details
-      </Link>
+    <section className="mx-auto max-w-3xl">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">
+          Edit Product
+        </h1>
 
-      <form onSubmit={handleSubmit} className="card space-y-5">
-        <div>
-          <h2 className="text-2xl font-bold text-slate-900">Edit Product</h2>
-          <p className="text-sm text-slate-500">GET product by ID, fill the form, then PATCH update.</p>
+        <p className="mt-1 text-gray-600">
+          Update the product information.
+        </p>
+      </div>
+
+      {submitError && (
+        <div className="mb-5 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+          {submitError}
         </div>
+      )}
 
-        {error && <p className="rounded-xl bg-red-50 p-3 text-sm font-medium text-red-700">{error}</p>}
-
-        <div className="grid gap-5 md:grid-cols-2">
-          <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-700">Title</span>
-            <input required name="title" value={form.title} onChange={handleChange} className="input-field" />
-          </label>
-
-          <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-700">Price</span>
-            <input required min="0" name="price" value={form.price} onChange={handleChange} type="number" className="input-field" />
-          </label>
-
-          <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-700">Category</span>
-            <input required name="category" value={form.category} onChange={handleChange} className="input-field" />
-          </label>
-
-          <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-700">Stock</span>
-            <input required min="0" name="stock" value={form.stock} onChange={handleChange} type="number" className="input-field" />
-          </label>
-        </div>
-
-        <label className="space-y-2 block">
-          <span className="text-sm font-semibold text-slate-700">Image URL</span>
-          <input required name="image" value={form.image} onChange={handleChange} className="input-field" />
-        </label>
-
-        <label className="space-y-2 block">
-          <span className="text-sm font-semibold text-slate-700">Description</span>
-          <textarea required name="description" value={form.description} onChange={handleChange} className="input-field min-h-32" />
-        </label>
-
-        <button disabled={submitting} className="btn-primary gap-2" type="submit">
-          <Save size={16} /> {submitting ? 'Updating...' : 'Update Product'}
-        </button>
-      </form>
-    </div>
+      <ProductForm
+        initialValues={product}
+        onSubmit={handleUpdateProduct}
+        submitText="Update Product"
+      />
+    </section>
   )
 }
+
+export default EditProductPage
