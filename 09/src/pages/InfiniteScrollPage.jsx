@@ -28,7 +28,7 @@ export default function InfiniteScrollPage() {
     setError("");
 
     try {
-      const result = await getProducts(pageToLoad, 8);
+      const result = await getProducts({ page: pageToLoad, limit: 8 });
 
       if (requestId !== requestIdRef.current) return;
 

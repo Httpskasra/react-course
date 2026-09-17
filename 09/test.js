@@ -1,4 +1,2 @@
-console.log(
-//   Array.from({ length: 12 }, (_, i) => i + 1).slice(page - 2, page + 3),
-);
-console.log(Math.max(0 ,-2));
+const param = { q: "kasra", page: 2, minPrice: 2000 };
+Object.entries(param).forEach(([key, val]) => console.log(key,val) );

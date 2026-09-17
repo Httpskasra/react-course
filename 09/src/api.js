@@ -1,9 +1,16 @@
 const API_URL = import.meta.env.VITE_API_URL;
-export async function getProducts(page = 1, limit = 8, signal) {
-  const response = await fetch(
-    `${API_URL}/products?page=${page}&limit=${limit}`,
-    { signal },
-  );
+export async function getProducts(param = {}, signal) {
+  const queryParam = new URLSearchParams();
+
+  Object.entries(param).forEach(([key, val]) => {
+    if (val !== "" && val !== undefined && val !== null) {
+      queryParam.set(key, String(val));
+    }
+  });
+
+  const response = await fetch(`${API_URL}/products?${queryParam.toString()}`, {
+    signal,
+  });
   if (!response.ok) {
     throw new Error("خطای سرور");
   }
