@@ -1,0 +1,273 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+.app {
+  min-height: 100vh;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.app.light {
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+  color: #172033;
+}
+
+.app.dark {
+  background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+  color: #f8fafc;
+}
+
+.navbar {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  opacity: 0.65;
+}
+
+.theme-button {
+  padding: 11px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  background: #ffffff;
+  color: #172033;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.theme-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.16);
+}
+
+.app.dark .theme-button {
+  background: #1f2937;
+  color: #f8fafc;
+}
+
+.content {
+  min-height: calc(100vh - 96px);
+  display: grid;
+  place-items: center;
+  padding: 32px 16px 72px;
+}
+
+.hero-card {
+  width: min(720px, 100%);
+  padding: clamp(28px, 6vw, 56px);
+  border-radius: 30px;
+  text-align: center;
+  backdrop-filter: blur(18px);
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.app.light .hero-card {
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+}
+
+.app.dark .hero-card {
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+}
+
+.badge {
+  width: fit-content;
+  margin: 0 auto 16px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  background: rgba(99, 102, 241, 0.12);
+  color: #4f46e5;
+}
+
+.app.dark .badge {
+  color: #c7d2fe;
+  background: rgba(99, 102, 241, 0.2);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+p {
+  max-width: 590px;
+  margin: 24px auto 0;
+  line-height: 1.9;
+  opacity: 0.75;
+  direction: rtl;
+}
+
+.status-card {
+  margin: 30px auto 0;
+  width: min(320px, 100%);
+  padding: 16px 18px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.status-label {
+  opacity: 0.68;
+}
+
+.flow {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.flow > div {
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.flow span {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto 10px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.78rem;
+  font-weight: 800;
+  background: rgba(99, 102, 241, 0.14);
+}
+
+.flow strong,
+.flow small {
+  display: block;
+}
+
+.flow small {
+  margin-top: 6px;
+  line-height: 1.5;
+  opacity: 0.6;
+  direction: rtl;
+}
+
+@media (max-width: 680px) {
+  .navbar {
+    align-items: flex-start;
+  }
+
+  .flow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.font-size-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+
+.font-size-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.font-size-buttons button {
+  padding: 7px 9px;
+  border-radius: 9px;
+  cursor: pointer;
+  background: rgba(99, 102, 241, 0.1);
+  color: inherit;
+}
+
+.font-size-buttons button.active {
+  background: #6366f1;
+  color: white;
+}
+
+.font-small .hero-card p {
+  font-size: 0.9rem;
+}
+
+.font-medium .hero-card p {
+  font-size: 1rem;
+}
+
+.font-large .hero-card p {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 760px) {
+  .navbar-actions {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .font-size-control {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
