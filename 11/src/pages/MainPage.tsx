@@ -1,8 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
 import ThemeStatus from "../components/ThemeStatus";
-import { useTheme } from "../context/ThemeContext";
+import { RootState } from "../app/store";
+import { logout } from "../feature/authSlice";
+
 export default function MainPage() {
+  const userForShow = useSelector((state: RootState) => state.auth.user);
+
+  const dispatch = AppDispatch();
+
   return (
     <main className="content">
+      <h1>{userForShow}</h1>
+      <button onClick={() => dispatch(logout())}>click me </button>
       <section className="hero-card">
         <div className="badge">React Context</div>
 

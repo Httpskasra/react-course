@@ -3,6 +3,7 @@ import ThemeStatus from "./components/ThemeStatus";
 import { useTheme } from "./context/ThemeContext";
 import MainPage from "./pages/MainPage";
 
+
 function App() {
   const { theme } = useTheme();
 
