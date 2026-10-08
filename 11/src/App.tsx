@@ -1,18 +1,17 @@
 import Navbar from "./components/Navbar";
-import ThemeStatus from "./components/ThemeStatus";
 import { useTheme } from "./context/ThemeContext";
+import { useAppSelector } from "./app/hooks";
 import MainPage from "./pages/MainPage";
-
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   const { theme } = useTheme();
-
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   return (
     <div className={`app ${theme}`}>
       <Navbar />
-      <MainPage />
+      {isAuth ? <MainPage /> : <LoginPage />}
     </div>
   );
 }
-
 export default App;

@@ -1,28 +1,59 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
+export type AuthUser = { id: string; name: string; email: string };
+type AuthState = { user: AuthUser | null; isAuth: boolean };
+const STORAGE_KEY = "demo-auth-user";
+
+function loadUser(): AuthUser | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const value: unknown = JSON.parse(raw);
+    if (
+      typeof value === "object" &&
+      value !== null &&
+      "id" in value &&
+      "name" in value &&
+      "email" in value &&
+      typeof value.id === "string" &&
+      typeof value.name === "string" &&
+      typeof value.email === "string" &&
+      value.id === "demo-user" &&
+      value.email === "student@example.com"
+    ) {
+      return { id: value.id, name: value.name, email: value.email };
+    }
+  } catch {
+    /* Ignore corrupt browser storage */
+  }
+  return null;
+}
+const savedUser = loadUser();
+const initialState: AuthState = { user: savedUser, isAuth: savedUser !== null };
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    user: "kasra",
-    token: null,
-    isAuth: false,
-  },
+  initialState,
   reducers: {
-    login: (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isAuth = action.payload.isAuth;
+    login: (state, action: PayloadAction<AuthUser>) => {
+      state.user = action.payload;
+      state.isAuth = true;
     },
     logout: (state) => {
-      state.user = "null";
-      state.token = null;
+      state.user = null;
       state.isAuth = false;
     },
   },
 });
 
-export default authSlice.reducer;
 export const { login, logout } = authSlice.actions;
+export default authSlice.reducer;
 
 
 
+
+
+
+export const saveDemoSession = (user: AuthUser) =>
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+export const clearDemoSession = () => localStorage.removeItem(STORAGE_KEY);
