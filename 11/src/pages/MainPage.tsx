@@ -6,7 +6,7 @@ import { logout } from "../feature/authSlice";
 export default function MainPage() {
   const userForShow = useSelector((state: RootState) => state.auth.user);
 
-  const dispatch = AppDispatch();
+  const dispatch = useDispatch();
 
   return (
     <main className="content">
