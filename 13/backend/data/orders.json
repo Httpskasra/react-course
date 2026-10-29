@@ -1,0 +1,90 @@
+[
+  {
+    "id": "571987aa-03cd-454e-b384-d7b7938c5424",
+    "customer": "Olivia Brooks",
+    "email": "admin@nova.test",
+    "total": 1140,
+    "status": "pending",
+    "date": "2026-10-22",
+    "items": [
+      {
+        "id": "nova-005",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "33c1062f-8911-49c9-85d6-1b3aa3a6c621",
+    "customer": "Olivia Brooks",
+    "email": "admin@nova.test",
+    "total": 145,
+    "status": "pending",
+    "date": "2026-10-21",
+    "items": [
+      {
+        "id": "nova-008",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "ord-10001",
+    "customer": "Mia Taylor",
+    "email": "customer@nova.test",
+    "total": 349,
+    "status": "delivered",
+    "date": "2026-10-16",
+    "items": [
+      {
+        "id": "nova-001",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "ord-10002",
+    "customer": "James Parker",
+    "email": "james@example.com",
+    "total": 318,
+    "status": "processing",
+    "date": "2026-10-18",
+    "items": [
+      {
+        "id": "nova-002",
+        "quantity": 1
+      },
+      {
+        "id": "nova-003",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "ord-10003",
+    "customer": "Leah Morgan",
+    "email": "leah@example.com",
+    "total": 420,
+    "status": "delivered",
+    "date": "2026-10-19",
+    "items": [
+      {
+        "id": "nova-004",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "ord-10004",
+    "customer": "Mia Taylor",
+    "email": "customer@nova.test",
+    "total": 86,
+    "status": "pending",
+    "date": "2026-10-21",
+    "items": [
+      {
+        "id": "nova-006",
+        "quantity": 1
+      }
+    ]
+  }
+]

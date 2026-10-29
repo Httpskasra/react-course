@@ -1,0 +1,30 @@
+[
+  {
+    "id": "u-admin",
+    "name": "Olivia Brooks",
+    "email": "admin@nova.test",
+    "role": "admin",
+    "password": "demo1234"
+  },
+  {
+    "id": "u-manager",
+    "name": "Noah Carter",
+    "email": "manager@nova.test",
+    "role": "manager",
+    "password": "demo1234"
+  },
+  {
+    "id": "u-staff",
+    "name": "Ava Wilson",
+    "email": "staff@nova.test",
+    "role": "staff",
+    "password": "demo1234"
+  },
+  {
+    "id": "u-customer",
+    "name": "Mia Taylor",
+    "email": "customer@nova.test",
+    "role": "customer",
+    "password": "demo1234"
+  }
+]
