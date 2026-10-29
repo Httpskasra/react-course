@@ -1,0 +1,3 @@
+import { SiteHeader } from '@/components/site-header';
+import Link from 'next/link';
+export default function StoreLayout({children}:{children:React.ReactNode}){return <><SiteHeader/>{children}<footer className="footer"><div className="container footer-main"><div><Link href="/" className="brand"><span className="brand-icon">✳</span> ATELIER<span className="brand-light">NOVA</span>.</Link><p>Objects with soul. Spaces with stories.<br/>Made for the art of living.</p></div><div className="footer-links"><Link href="/shop">Shop collection</Link><Link href="/collections/living/modern">Our world</Link><Link href="/dashboard">Dashboard</Link></div><p>© 2026 Atelier Nova<br/>Designed with intention.</p></div></footer></>}

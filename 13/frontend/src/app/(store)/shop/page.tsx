@@ -1,0 +1,9 @@
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { getProducts } from '@/lib/api';
+import { ProductCard } from '@/components/product-card';
+import { ShopFilter } from '@/components/shop-filter';
+export const metadata:Metadata={title:'The Collection'};
+type Params={searchParams:Promise<{q?:string;category?:string;sort?:string}>};
+async function Results({searchParams}:{searchParams:Params['searchParams']}){const filters=await searchParams;const products=await getProducts();const categories=[...new Set(products.map(p=>p.category))];let visible=products.filter(p=>(!filters.category||p.category===filters.category)&&(!filters.q||`${p.name} ${p.description}`.toLowerCase().includes(filters.q.toLowerCase())));if(filters.sort==='price-asc')visible=[...visible].sort((a,b)=>a.price-b.price);if(filters.sort==='price-desc')visible=[...visible].sort((a,b)=>b.price-a.price);return <><Suspense fallback={<div className="shop-controls">Loading filters...</div>}><ShopFilter categories={categories}/></Suspense><p className="result-count">Showing {visible.length} thoughtfully curated pieces</p><div className="products-grid">{visible.map((p,i)=><ProductCard product={p} index={i} key={p.id}/>)}</div>{visible.length===0&&<div className="empty-state">Nothing matched your search. Try another term.</div>}</>}
+export default function Shop({searchParams}:Params){return <main className="container shop-page"><div className="page-heading"><span className="section-kicker">OUR WORLD / THE COLLECTION</span><h1>Made to be <em>loved.</em></h1><p>Small details, beautiful impact. Find your new favorite thing.</p></div><Suspense fallback={<div className="products-grid">{[1,2,3,4,5,6,7,8].map(i=><div className="product-skeleton" key={i}/>)}</div>}><Results searchParams={searchParams}/></Suspense></main>}

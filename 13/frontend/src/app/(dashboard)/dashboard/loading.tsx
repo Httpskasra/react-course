@@ -1,0 +1,1 @@
+export default function LoadingDashboard(){return <div className="dash-content"><div className="skeleton-line"/><div className="stat-grid">{[0,1,2,3].map(i=><div className="stat-card shimmer" key={i}/>)}</div><div className="dash-card shimmer" style={{height:340}}/></div>}

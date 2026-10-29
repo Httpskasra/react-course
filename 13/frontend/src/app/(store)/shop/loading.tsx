@@ -1,0 +1,1 @@
+export default function ShopLoading(){return <div className="container shop-page"><div className="skeleton-line"/><div className="products-grid">{Array.from({length:8},(_,i)=><div className="product-skeleton" key={i}/>)}</div></div>}

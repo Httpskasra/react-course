@@ -1,0 +1,4 @@
+import { requireRole } from '@/lib/auth';
+import { getUsers } from '@/lib/api';
+import { roleLabels } from '@/lib/types';
+export default async function Users(){const {token}=await requireRole(['admin']);const users=await getUsers(token);return <main className="dash-content"><div className="inner-heading"><span className="section-kicker">TEAM / ACCESS CONTROL</span><h1>People & <em>permissions.</em></h1><p>Roles are enforced in the API and protected server routes.</p></div><div className="admin-products">{users.map(u=><div className="admin-product" key={u.id}><div className="user-avatar">{u.name[0]}</div><div className="admin-product-name"><strong>{u.name}</strong><span>{u.email}</span></div><span className="role-tag">{roleLabels[u.role]}</span></div>)}</div><div className="manager-note">Only administrators can open this section. This educational demo intentionally keeps role edits disabled to prevent accidental privilege escalation.</div></main>}
